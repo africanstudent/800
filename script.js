@@ -1,6 +1,3 @@
-// script.js
-import { database, ref, set } from './firebase.js';
-
 document.querySelectorAll('.iphone-model').forEach(button => {
     button.addEventListener('click', () => {
         const model = button.getAttribute('data-model');
@@ -16,7 +13,7 @@ function displayPrices(model) {
         screen: 150000,
         water: 200000
     };
-
+    
     const modelMultiplier = {
         '11': 0,
         '11-Pro': 1,
@@ -38,9 +35,9 @@ function displayPrices(model) {
         '15-Pro': 17,
         '15-Pro-Max': 18
     };
-
+    
     const multiplier = modelMultiplier[model];
-
+    
     document.getElementById('audio-price').textContent = `Ugx.${basePrices.audio + (multiplier * 5500)}`;
     document.getElementById('network-price').textContent = `Ugx.${basePrices.network + (multiplier * 5000)}`;
     document.getElementById('battery-price').textContent = `Ugx.${basePrices.battery + (multiplier * 9950)}`;
@@ -51,17 +48,9 @@ function displayPrices(model) {
 function submitComplexIssue() {
     const issue = document.getElementById('complex-issue').value;
     if(issue) {
-        // Save the complex issue to Firebase
-        const issueRef = ref(database, 'complex_issues/' + Date.now());
-        set(issueRef, {
-            issue: issue,
-            timestamp: Date.now()
-        }).then(() => {
-            console.log('Complex Issue Submitted: ', issue);
-            alert('Your complex issue has been submitted.');
-        }).catch((error) => {
-            console.error('Error submitting complex issue: ', error);
-        });
+        // Here you can send the issue to your backend/database
+        console.log(`Complex Issue Submitted: ${issue}`);
+        alert('Your complex issue has been submitted.');
     } else {
         alert('Please specify the complex issue.');
     }
